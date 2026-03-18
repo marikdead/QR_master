@@ -133,24 +133,20 @@ class ScanResultScreen extends StatelessWidget {
 
   Future<void> _addToContacts(BuildContext context, ScanParsedResult parsed) async {
     try {
-      final granted = await FlutterContacts.requestPermission();
+      final status = await FlutterContacts.permissions.request(PermissionType.readWrite);
+      final granted = status == PermissionStatus.granted || status == PermissionStatus.limited;
       if (!granted) {
         if (!context.mounted) return;
         _snack(context, 'Нет доступа к контактам (разрешение не выдано)');
         return;
       }
 
-      final contact = Contact();
-      if (parsed.contactName != null) {
-        contact.name.first = parsed.contactName!;
-      }
-      if (parsed.contactPhone != null) {
-        contact.phones = [Phone(parsed.contactPhone!)];
-      }
-      if (parsed.contactEmail != null) {
-        contact.emails = [Email(parsed.contactEmail!)];
-      }
-      await contact.insert();
+      final contact = Contact(
+        name: parsed.contactName == null ? null : Name(first: parsed.contactName),
+        phones: parsed.contactPhone == null ? const [] : [Phone(number: parsed.contactPhone!)],
+        emails: parsed.contactEmail == null ? const [] : [Email(address: parsed.contactEmail!)],
+      );
+      await FlutterContacts.create(contact);
       if (!context.mounted) return;
       _snack(context, 'Contact saved');
     } catch (e) {

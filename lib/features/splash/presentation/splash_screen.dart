@@ -60,8 +60,8 @@ class _SplashScreenState extends State<SplashScreen> {
       // 2) AppsFlyer
       final appsflyer = AppsflyerSdk(
         AppsFlyerOptions(
-          afDevKey: 'wWnc2go5ZMLf9xRNFtwAj3',
-            appId: '6757518897',
+          afDevKey: 'GAgckFyN4yETigBtP4qtRG',
+            appId: '6749377146',
           timeToWaitForATTUserAuthorization: 60,
           showDebug: true
         ),
@@ -76,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // 3) Apphud
       final apphud = injector<ApphudRepository>();
       await Apphud.enableDebugLogs();
-      await apphud.start(apiKey: 'app_ZDSi53wDcoKtia6ifB4MEgTemh9tKH');//.timeout(_stepTimeout);
+      await apphud.start(apiKey: 'app_Z44sHCCXqhP5FCBDa8SxKBLB7VLpga');//.timeout(_stepTimeout);
 
 
       // AppsFlyer conversion data -> Apphud attribution (best-effort)
