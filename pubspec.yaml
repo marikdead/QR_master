@@ -132,6 +132,7 @@ flutter:
     - assets/svg/qr_scanner/
     - assets/svg/splashscreen/
     - assets/svg/shared/
+    - assets/svg/subscription_screen/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
